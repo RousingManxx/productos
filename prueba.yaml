@@ -1,0 +1,51 @@
+version: '3.3'
+services:
+  alumnosregistro:
+    image: amazoncorretto:18
+    networks:
+    - mired
+    volumes:
+    - ./app:/app
+    ports:
+    - 8080:8080
+    environment:
+       MYSQL_HOST: db
+    command:
+    - java
+    - -jar
+    - /app/alumnosregistro.jar
+    depends_on:
+    - db
+    links:
+    - db
+    restart: always
+  alumnosconsulta:
+    image: amazoncorretto:18
+    networks:
+    - mired
+    volumes:
+    - ./app:/app
+    ports:
+    - 8081:8080
+    environment:
+       MYSQL_HOST: db
+    command:
+    - java
+    - -jar
+    - /app/alumnosconsulta.jar
+    depends_on:
+    - db
+    links:
+    - db
+    restart: always
+  db:
+    image: mariadb
+    networks:
+      - mired
+    environment:
+      MARIADB_ROOT_PASSWORD: 123456
+    volumes:
+    - ./app:/docker-entrypoint-initdb.d
+    - ./app/datos:/var/lib/mysql
+networks:
+  mired:
