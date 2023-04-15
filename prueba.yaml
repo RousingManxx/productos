@@ -1,6 +1,6 @@
 version: '3.3'
 services:
-  alumnosregistro:
+  productos1:
     image: amazoncorretto:18
     networks:
     - mired
@@ -13,13 +13,13 @@ services:
     command:
     - java
     - -jar
-    - /app/alumnosregistro.jar
+    - /app/productos1.jar
     depends_on:
     - db
     links:
     - db
     restart: always
-  alumnosconsulta:
+  productos2:
     image: amazoncorretto:18
     networks:
     - mired
@@ -32,7 +32,26 @@ services:
     command:
     - java
     - -jar
-    - /app/alumnosconsulta.jar
+    - /app/productos2.jar
+    depends_on:
+    - db
+    links:
+    - db
+    restart: always
+  productos3:
+    image: amazoncorretto:18
+    networks:
+    - mired
+    volumes:
+    - ./app:/app
+    ports:
+    - 8082:8080
+    environment:
+       MYSQL_HOST: db
+    command:
+    - java
+    - -jar
+    - /app/productos3.jar
     depends_on:
     - db
     links:
