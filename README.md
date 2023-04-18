@@ -11,4 +11,4 @@
 - docker-compose -f prueba.yaml up
 
 ### Como entrar
-- Entrar a la direccion agregando /ws/productos 
+- Entrar a la direccion agregando /ws/productos.wsdl 
